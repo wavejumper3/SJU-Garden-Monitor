@@ -1,0 +1,12 @@
+# Ignore the Python venv
+SJU-GARDEN-MONITOR/
+venv/
+.env/
+env/
+
+# Standard Python GitIgnores
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3

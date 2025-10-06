@@ -2,7 +2,8 @@ import RPi.GPIO as GPIO
 import spidev
 import time
 import board
-import Adafruit_DHT
+import adafruit_dht
+from board import D23
 import psutil
 import spidev
 import sqlite3
@@ -111,11 +112,16 @@ def run_circuit():
 #Humidity setup
 DHT_PIN = 23
 GPIO.setup(DHT_PIN, GPIO.OUT)
+dht_device = adafruit_dht.DHT11(D23)
+
 # check and terminate any running libgpiod process.
 
 def humidity():
 	try:
-		humidity, temp = Adafruit_DHT.read(Adafruit_DHT.DHT11, 23)
+		#humidity, temp = Adafruit_DHT.read(Adafruit_DHT.DHT11, 23)
+		humidity = dht_device.humidity
+		temp = dht_device.temperature
+
 		insert_sensor_data(temp, humidity, 50, light_on())
 		return temp, humidity
 		print("Temperature: {}*C   Humidity: {}% ".format(temp, humidity))
